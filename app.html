@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ग्लोबल हॉस्पिटल मैनेजमेंट ऐप</title>
+    <title>ग्लोबल अस्पताल मैनेजमेंट ऐप</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 15px; color: #333; }
         h1 { color: #004080; text-align: center; font-size: 24px; margin-bottom: 20px; }
@@ -16,6 +16,8 @@
         input, textarea { width: 95%; padding: 10px; margin-top: 5px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
         .status-online { color: green; font-weight: bold; }
         .db-status { background: #e2f0d9; color: #385723; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; text-align: center; font-weight: bold; border: 1px solid #a9d18e; }
+        /* Call Here बटन का सुंदर डिज़ाइन */
+        .call-here-btn { background: #ff3333; color: white; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 14px; border: 1px solid #cc0000; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
@@ -35,37 +37,32 @@
         <div id="regSuccess" style="margin-top:10px; color:green; font-weight:bold;"></div>
     </div>
 
-    <!-- 2. डॉक्टरों की लिस्ट -->
+    <!-- 2. लाइव डॉक्टर लिस्ट और सीधे कॉल का बटन (Call Here) -->
     <div class="box">
         <h2>👨‍⚕️ लाइव डॉक्टर लिस्ट एवं फीस चार्ट</h2>
         <table>
             <tr>
                 <th>डॉक्टर / अस्पताल</th>
                 <th>फीस</th>
-                <th>स्थिति</th>
+                <th>संपर्क केंद्र</th>
             </tr>
             <tr>
                 <td><b>डॉ. संदीप गुलेरिया</b><br><small>कार्डियोलॉजिस्ट, AIIMS दिल्ली</small></td>
                 <td>₹1,000</td>
-                <td class="status-online">● लाइव</td>
+                <td>
+                    <!-- सीधे एम्स दिल्ली के हेल्पलाइन नंबर से लिंक -->
+                    <a href="tel:01126588500" class="call-here-btn">📞 Call Here</a>
+                </td>
             </tr>
             <tr>
                 <td><b>डॉ. राजेश शर्मा</b><br><small>न्यूरोलॉजिस्ट, AIIMS ऋषिकेश</small></td>
                 <td>₹800</td>
-                <td class="status-online">● लाइव</td>
+                <td>
+                    <!-- सीधे एम्स ऋषिकेश के हेल्पलाइन नंबर से लिंक -->
+                    <a href="tel:01352462927" class="call-here-btn">📞 Call Here</a>
+                </td>
             </tr>
         </table>
-    </div>
-
-    <!-- 3. डिजिटल पर्चा मेकर (नया जोड़ा गया फीचर) -->
-    <div class="box">
-        <h2>📄 डॉक्टर का असली डिजिटल पर्चा (Prescription)</h2>
-        <label>मरीज का नाम लिखें:</label>
-        <input type="text" id="pName" placeholder="मरीज का नाम">
-        <label>दवाइयों के नाम और खुराक:</label>
-        <textarea id="pMeds" placeholder="उदा: Paracetamol 650mg - सुबह/शाम"></textarea>
-        <button class="btn" onclick="generatePrescription()">डिजिटल पर्चा जनरेट करें</button>
-        <div id="printArea" style="margin-top:15px; padding:10px; background:#fffbcb; border-left:4px solid #ffcc00; display:none;"></div>
     </div>
 
     <script>
@@ -77,15 +74,6 @@
             setTimeout(() => {
                 document.getElementById('regSuccess').innerHTML = "✓ सफलता! मरीज '" + name + "' का डेटा सुरक्षित रूप से आपके असली MongoDB क्लस्टर (Cluster0) में हमेशा के लिए सिंक हो गया है।";
             }, 1000);
-        }
-
-        function generatePrescription() {
-            var name = document.getElementById('pName').value;
-            var meds = document.getElementById('pMeds').value;
-            if(name == "" || meds == "") { alert("कृपया नाम और दवा भरें!"); return; }
-            var area = document.getElementById('printArea');
-            area.style.display = "block";
-            area.innerHTML = "<h3>✓ डिजिटल पर्चा सत्यापित:</h3><b>मरीज:</b> " + name + "<br><b>Rx (दवाइयाँ):</b><br>" + meds.replace(/\n/g, '<br>') + "<br><br><small>डिजिटल हस्ताक्षर: AIIMS मेडिकल काउंसिल</small>";
         }
     </script>
 
